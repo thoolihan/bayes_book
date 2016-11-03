@@ -5,7 +5,7 @@ plt.style.use('ggplot')
 
 colors = ["#348ABD", "#A60628"]
 
-count_data = np.loadtxt("data/txtdata.csv")
+count_data = np.loadtxt("BookSource/Chapter1_Introduction/data/txtdata.csv")
 n_count_data = len(count_data)
 
 plt.bar(np.arange(n_count_data), count_data, color = colors[0])
