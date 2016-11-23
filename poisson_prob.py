@@ -1,5 +1,4 @@
 import numpy as np
-from scipy.special import factorial
 
 def poisson_probability(actual, mean):
     #overflows: (mean ** candidate * np.e ** (-1 * mean)) / factorial(candidate)
