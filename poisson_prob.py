@@ -20,4 +20,4 @@ if __name__ == "__main__":
     outcomes = np.arange(kids + 1)
     prob_dist = poisson_probability(outcomes, mean_female)
     for n, p in zip(outcomes, prob_dist):
-        print("{n} females {p:.2f}%".format(n=n, p=100.*p))
+        print("{n} female(s) {p:7.4f}%".format(n=n, p=100.*p))
