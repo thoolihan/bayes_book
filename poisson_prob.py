@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.special import gammaln
 
-def _poisson_probability(actual, mean):
+def poisson_probability(actual, mean):
     '''
     Calculate poisson probability mass function.
     Since normal implementation is unstables (overflows), uses numerically stable implementation from
@@ -11,8 +11,6 @@ def _poisson_probability(actual, mean):
     :return: probability
     '''
     return np.exp(actual * np.log(mean) - mean - gammaln(actual + 1))
-
-poisson_probability = np.vectorize(_poisson_probability)
 
 if __name__ == "__main__":
     kids = 6
