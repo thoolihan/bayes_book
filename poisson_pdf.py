@@ -1,18 +1,18 @@
 import numpy as np
 from scipy.special import gammaln
 
-def pdf(actual, mean):
+def pdf(actual, lambda_):
     '''
     Calculate poisson probability density function.
     :param actual: z
-    :param mean: lambda, the expected value
+    :param lambda_: lambda, the expected value
     :return: probability
     '''
-    return mean * np.exp(-1 * mean * actual)
+    return lambda_ * np.exp(-1 * lambda_ * actual)
 
 if __name__ == "__main__":
-    actual = 1
-    predicted = .5
-    density = pdf(actual, predicted)
-    print("Density for {0} with mean of {1} is {2:05.2f}%".format(actual, predicted, density * 100))
+    actual = 5
+    mean = 21.5
+    density = pdf(actual, 1. / mean)
+    print("Density for {0} with mean of {1} is {2:05.2f}%".format(actual, mean, density * 100))
 
