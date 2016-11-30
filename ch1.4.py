@@ -3,7 +3,7 @@ import pymc as pm
 from IPython.core.pylabtools import figsize
 import matplotlib.pyplot as plt
 
-colors = ["#348ABD", "#A60628", "#7A68A6", "#467821", "#E24A33"]
+colors = ["#348ABD", "#A60628", "#7A68A6", "#467821"]
 
 count_data = np.loadtxt("BookSource/Chapter1_Introduction/data/txtdata.csv")
 n_count_data = len(count_data)
@@ -32,24 +32,39 @@ lambda_1_samples = mcmc.trace('lambda_1')[:]
 lambda_2_samples = mcmc.trace('lambda_2')[:]
 tau_samples = mcmc.trace('tau')[:]
 
-figsize(12.5, 5)
+figsize(14.5, 10)
 
-N = tau_samples.shape[0]
-expected_texts_per_day = np.zeros(n_count_data)
-for day in range(0, n_count_data):
-    ix = day < tau_samples
-    expected_texts_per_day[day] = (lambda_1_samples[ix].sum() \
-                                   + lambda_2_samples[~ix].sum()) / N
+ax = plt.subplot(311)
+ax.set_autoscaley_on(False)
 
-plt.plot(range(n_count_data), expected_texts_per_day, lw=4, color = colors[4],
-         label = "Expected number of text messages received")
-plt.xlim(0, n_count_data)
-plt.xlabel("Day")
-plt.ylabel("Number of text messages")
-plt.title("Number of text messages received versus expected number received")
-plt.ylim(0, 60)
-plt.bar(np.arange(len(count_data)), count_data, color=colors[0], alpha=0.65,
-        label="Observed text messages per day")
+plt.hist(lambda_1_samples, histtype='stepfilled', bins=31, alpha=0.85,
+         label="posterior of $\lambda1$", color=colors[1], normed=True)
 plt.legend(loc="upper left")
+plt.title(r"""Posterior distributions of the parameters\
+$\lambda_1,\;\lambda_2,\;\tau$""")
+plt.xlim([15, 30])
+plt.xlabel("$\lambda_1$ value")
+plt.ylabel("Density")
+
+ax = plt.subplot(312)
+ax.set_autoscaley_on(False)
+plt.hist(lambda_2_samples, histtype='stepfilled', bins=31, alpha=0.85,
+         label="posterior of $\lambda2$", color=colors[2], normed=True)
+plt.legend(loc="upper left")
+plt.xlim([15, 30])
+plt.xlabel("$\lambda_2$ value")
+plt.ylabel("Density")
+
+plt.subplot(313)
+w = 1.0 / tau_samples.shape[0] * np.ones_like(tau_samples)
+plt.hist(tau_samples, bins=n_count_data, alpha=1,
+         label="posterior of $\tau$", color=colors[3],
+         weights=w, rwidth=2)
+plt.xticks(np.arange(n_count_data))
+plt.legend(loc="upper left")
+plt.ylim([0, .75])
+plt.xlim([35, len(count_data)-20])
+plt.xlabel(r"$\tau$ (in days)")
+plt.ylabel("Probability")
+
 plt.show()
-print(expected_texts_per_day)
