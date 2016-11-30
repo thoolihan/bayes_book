@@ -23,7 +23,7 @@ def lambda_(tau = tau, lambda_1 = lambda_1, lambda_2 = lambda_2):
     out[tau:] = lambda_2
     return out
 
-observation = pm.Poisson("obs", lambda_, value= count_data, observed = True)
+observation = pm.Poisson("obs", lambda_, value = count_data, observed = True)
 
 model = pm.Model([observation, lambda_1, lambda_2, tau])
 mcmc = pm.MCMC(model)
