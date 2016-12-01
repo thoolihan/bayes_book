@@ -9,7 +9,7 @@ colors = ["#348ABD", "#A60628", "#7A68A6", "#467821", "#E24A33"]
 count_data = np.loadtxt("BookSource/Chapter1_Introduction/data/txtdata.csv")
 n_count_data = len(count_data)
 
-alpha = 1.0 / count_data.mean()
+alpha = 1. / count_data.mean()
 
 lambda_1 = pm.Exponential("lambda_1", alpha)
 lambda_2 = pm.Exponential("lambda_2", alpha)
@@ -23,7 +23,7 @@ def lambda_(tau = tau, lambda_1 = lambda_1, lambda_2 = lambda_2):
     out[tau:] = lambda_2
     return out
 
-observation = pm.Poisson("obs", lambda_, value= count_data, observed = True)
+observation = pm.Poisson("obs", lambda_, value = count_data, observed = True)
 
 model = pm.Model([observation, lambda_1, lambda_2, tau])
 mcmc = pm.MCMC(model)
