@@ -1,8 +1,5 @@
 import numpy as np
 import pymc as pm
-from IPython.core.pylabtools import figsize
-import matplotlib.pyplot as plt
-plt.style.use('ggplot')
 
 colors = ["#348ABD", "#A60628", "#7A68A6", "#467821", "#E24A33"]
 
