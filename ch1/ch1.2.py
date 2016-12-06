@@ -1,11 +1,11 @@
 from matplotlib import pyplot as plt
 import numpy as np
+from ch1 import count_data
 
 plt.style.use('ggplot')
 
 colors = ["#348ABD", "#A60628"]
 
-count_data = np.loadtxt("BookSource/Chapter1_Introduction/data/txtdata.csv")
 n_count_data = len(count_data)
 
 plt.bar(np.arange(n_count_data), count_data, color = colors[0])

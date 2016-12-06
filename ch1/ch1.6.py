@@ -1,9 +1,9 @@
 import numpy as np
 import pymc as pm
+from ch1 import count_data
 
 colors = ["#348ABD", "#A60628", "#7A68A6", "#467821", "#E24A33"]
 
-count_data = np.loadtxt("BookSource/Chapter1_Introduction/data/txtdata.csv")
 n_count_data = len(count_data)
 
 alpha = 1. / count_data.mean()
